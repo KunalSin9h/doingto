@@ -10,11 +10,11 @@
     <meta name="description" content="doingto is simple and open source todo app" />
     <meta name="keywords" content="todo Todo ToDo doing Doing done Done project">
 
-    <link rel="canonical" href="https://doingto.live" />
+    <link rel="canonical" href="https://doingto.live/" />
 
     <!-- open graph -->
     <meta property="og:title" content="doingto is simple and open source todo app." />
-    <meta property="og:url" content="https://doingto.live" />
+    <meta property="og:url" content="https://doingto.live/" />
     <meta property="og:image" content="./images/ogimage.png" />
     <meta property="og:type" content="website" />
     <meta property="og:description"
@@ -53,10 +53,38 @@
             </div>
             <div class="create--work">
                 <textarea placeholder="Today's work"></textarea>
-                <button class="create--btn orange-outline">Create work</button>
+                <button class="create--btn">Create work</button>
             </div>
         </div>
     </main>
+
+    <div class="work--title hidden">Today's work</div>
+
+    <div class="list hidden">
+        <section class="sect todo">
+            <h1>Todo</h1>
+            <div class="todo-tasks tasks">
+                <ul class="tasks-wrapper"></ul>
+            </div>
+            <button class="btn add-todo">Add</button>
+            <button class="btn complete-all-todo">Complete All</button>
+        </section>
+        <section class="sect doing">
+            <h1>Doing</h1>
+            <div class="todo-tasks tasks">
+                <ul class="tasks-wrapper"></ul>
+            </div>
+            <button class="btn add-doing">Add</button>
+            <button class="btn complete-all-todo">Complete All</button>
+        </section>
+        <section class="sect done">
+            <h1>Done</h1>
+            <div class="todo-tasks tasks">
+                <ul class="tasks-wrapper"></ul>
+            </div>
+        </section>
+    </div>
+
     <footer>
         <div class="info">
             <div class="info-text">
@@ -73,8 +101,8 @@
                 <a href="mailto:support@doingto.live">support@doingto.live</a>
             </div>
         </div>
-
     </footer>
+    <script src="./script.js"></script>
 </body>
 
 </html>

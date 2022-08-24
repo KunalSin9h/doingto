@@ -1,16 +1,25 @@
 'use strict';
 
+let taskType = `todo`;
+
 const mainCenter = document.querySelector(`.sec`),
     footer = document.querySelector(`footer`),
     createWork = document.querySelector(`.create--btn`),
     deleteWork = document.querySelector(`.delete--work`),
     textArea = document.querySelector(`.textarea--1`),
+    taskTextArea = document.querySelector(`.textarea--2`),
     workTitle = document.querySelector(`.work--title`),
     pageTitle = document.querySelector(`title`),
     lists = document.querySelector(`.list`),
+    modalAddTasks = document.querySelector(`.add--tasks`),
+    cancelBtn = document.querySelector(`.cancel`),
+    overlay = document.querySelector(`.overlay`),
     addTodo = document.querySelector(`.add-todo`),
     addDoing = document.querySelector(`.add-doing`),
-    addDone = document.querySelector(`.add-done`);
+    addDone = document.querySelector(`.add-done`),
+    addButton = document.querySelector(`.add`),
+    warning = document.querySelector(`.no-text-warning`);
+
 
 setupPage();
 
@@ -20,11 +29,63 @@ createWork.addEventListener(`click`, () => {
 })
 
 deleteWork.addEventListener(`click`, () => {
-    localStorage.setItem(`isWork`, `false`);
-    localStorage.removeItem(`workName`);
+    localStorage.clear();
     hideWorkspace();
     showStart();
     pageTitle.textContent = `doingto`; 
+})
+
+textArea.addEventListener(`keypress`, (e) => {
+    if (e.key === `Enter`) {
+        const workName = textArea.value;
+        createWorkspace(workName);       
+    } 
+})
+
+addTodo.addEventListener(`click`, () => {
+    showModal();
+    taskType = `todo`;
+})
+
+addDoing.addEventListener(`click`, () => {
+    showModal();
+    taskType = `doing`;
+})
+
+addDone.addEventListener(`click`, () => {
+    showModal();
+    taskType = `done`;
+})
+
+cancelBtn.addEventListener(`click`, () => {
+    hideModal();
+    hideWarning();
+})
+
+overlay.addEventListener(`click`, () => {
+    hideModal();
+    hideWarning();
+})
+
+addButton.addEventListener(`click`, () => {
+    const input = taskTextArea.value; 
+    taskTextArea.value = ``;
+    const taskInput = makeTask(input, taskType);
+    
+    if (input === '') {
+        showWarning();
+    } else {
+        hideModal();
+        hideWarning();
+        
+    }
+})
+
+taskTextArea.addEventListener(`keypress`, (e) => {
+    hideWarning();
+    if (e.key === `Enter`){
+        hideModal();
+    }
 })
 
 function setupPage() {
@@ -95,4 +156,35 @@ function setupLists() {
 
 function hideLists() {
     lists.style.display = `none`;
+}
+
+function showModal() {
+    overlay.classList.remove(`hidden`);
+    modalAddTasks.classList.remove(`hidden`);
+}
+
+function hideModal() {
+    overlay.classList.add(`hidden`);
+    modalAddTasks.classList.add(`hidden`);   
+}
+
+function showWarning() {
+    warning.classList.remove(`hidden`);
+}
+
+function hideWarning() {
+    warning.classList.add(`hidden`);
+}
+
+function saveTaskToStorage(task) {
+    const savedTasks = JSON.parse(localStorage.getItem(`tasks`)) || [];
+    savedTasks.push(task);         
+    localStorage.setItem(`tasks`, JSON.stringify(savedTasks));
+}
+
+function makeTask(taskTitle, toList) {
+    return {
+        title: taskTitle,
+        list: toList,
+    };
 }

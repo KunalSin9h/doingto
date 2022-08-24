@@ -58,8 +58,17 @@
         </div>
     </main>
 
+    <section class="overlay hidden"></section>
+
     <div class="work--title hidden">Today's work</div>
     <button type="button" class="delete--work">Delete work</button>
+
+    <section class="add--tasks hidden">
+         <div class="no-text-warning hidden">⛔️ Task cannot be empty!</div>
+        <textarea placeholder="Enter new task here" rows="5" class="textarea--2"></textarea>
+        <button class="btn cancel">Cancel</button>
+        <button class="btn add">Add</button>
+    </section>
 
     <div class="list hidden">
         <section class="sect todo">
@@ -71,17 +80,17 @@
         </section>
         <section class="sect doing">
             <h1>Doing</h1>
-            <div class="todo-tasks tasks">
+            <div class="doing-tasks tasks">
                 <ul class="tasks-wrapper"></ul>
             </div>
             <button class="btn add-doing">Add</button>
         </section>
         <section class="sect done">
             <h1>Done</h1>
-            <div class="todo-tasks tasks">
+            <div class="done-tasks tasks">
                 <ul class="tasks-wrapper"></ul>
             </div>
-            <button class="btn add-doing">Add</button>
+            <button class="btn add-done">Add</button>
         </section>
     </div>
 
@@ -96,9 +105,9 @@
         </div>
 
         <div class="link">
-            <a href="https://github.com/KunalSin9h/doingto"><img src="./images/github.png" alt="github logo" /></a>
+            <a href="https://github.com/KunalSin9h/doingto" target="_blank"><img src="./images/github.png" alt="github logo" /></a>
             <div class="support">
-                <a href="mailto:support@doingto.live">support@doingto.live</a>
+                Feedback : <a href="mailto:support@doingto.live">support@doingto.live</a>
             </div>
         </div>
     </footer>

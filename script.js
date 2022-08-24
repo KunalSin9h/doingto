@@ -18,6 +18,9 @@ const mainCenter = document.querySelector(`.sec`),
     addDoing = document.querySelector(`.add-doing`),
     addDone = document.querySelector(`.add-done`),
     addButton = document.querySelector(`.add`),
+    todoTasks = document.querySelector(`.todo-tasks`),
+    doingTasks = document.querySelector(`.doing-tasks`),
+    doneTasks = document.querySelector(`.done-tasks`),
     warning = document.querySelector(`.no-text-warning`);
 
 
@@ -31,6 +34,7 @@ createWork.addEventListener(`click`, () => {
 deleteWork.addEventListener(`click`, () => {
     localStorage.clear();
     hideWorkspace();
+    removeOldTasks();
     showStart();
     pageTitle.textContent = `doingto`; 
 })
@@ -72,19 +76,25 @@ addButton.addEventListener(`click`, () => {
     taskTextArea.value = ``;
     const taskInput = makeTask(input, taskType);
     
-    if (input === '') {
+    if (input === ``) {
         showWarning();
     } else {
         hideModal();
         hideWarning();
-        
+        saveTaskToStorage(taskInput);
+        createTodo(taskInput);
     }
 })
 
 taskTextArea.addEventListener(`keypress`, (e) => {
     hideWarning();
     if (e.key === `Enter`){
+        const input = taskTextArea.value; 
+        taskTextArea.value = ``;
+        const taskInput = makeTask(input, taskType);
         hideModal();
+        saveTaskToStorage(taskInput);
+        createTodo(taskInput);
     }
 })
 
@@ -94,8 +104,13 @@ function setupPage() {
         hideStart();
         showWorkspace();
         reloadWorkspace();
-    }
-    else {
+        
+        const savedTasks = JSON.parse(localStorage.getItem(`tasks`)) || [];
+    
+        savedTasks.forEach(task => {
+            createTodo(task); 
+        }) 
+    } else {
         showStart();
         hideWorkspace();
     }
@@ -176,6 +191,12 @@ function hideWarning() {
     warning.classList.add(`hidden`);
 }
 
+function removeOldTasks() {
+    todoTasks.innerHTML = ``;
+    doingTasks.innerHTML = ``;
+    doneTasks.innerHTML = ``;
+}
+
 function saveTaskToStorage(task) {
     const savedTasks = JSON.parse(localStorage.getItem(`tasks`)) || [];
     savedTasks.push(task);         
@@ -188,3 +209,19 @@ function makeTask(taskTitle, toList) {
         list: toList,
     };
 }
+
+function createTodo(task) {
+
+    const taskListElement = document.createElement(`li`);
+    taskListElement.innerHTML = `${task.title}`;
+    taskListElement.classList.add(`tasks-list-items`);
+    
+    if (task.list === `todo`) {
+        todoTasks.appendChild(taskListElement);
+    } else if (task.list === `doing`) {
+        doingTasks.appendChild(taskListElement);
+    } else if (task.list === `done`) {
+        doneTasks.appendChild(taskListElement);
+    }
+}
+

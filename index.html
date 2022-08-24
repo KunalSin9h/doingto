@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
     <!-- meta data -->
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:description"
         content="doingto is simple and open source todo app which lets you to devide you progress into three category viz todo, doing and done." />
-    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -52,13 +52,14 @@
                 <div class="name">doingto</div>
             </div>
             <div class="create--work">
-                <textarea placeholder="Today's work"></textarea>
+                <textarea placeholder="Today's work" class="textarea--1"></textarea>
                 <button class="create--btn">Create work</button>
             </div>
         </div>
     </main>
 
     <div class="work--title hidden">Today's work</div>
+    <button type="button" class="delete--work">Delete work</button>
 
     <div class="list hidden">
         <section class="sect todo">
@@ -67,7 +68,6 @@
                 <ul class="tasks-wrapper"></ul>
             </div>
             <button class="btn add-todo">Add</button>
-            <button class="btn complete-all-todo">Complete All</button>
         </section>
         <section class="sect doing">
             <h1>Doing</h1>
@@ -75,13 +75,13 @@
                 <ul class="tasks-wrapper"></ul>
             </div>
             <button class="btn add-doing">Add</button>
-            <button class="btn complete-all-todo">Complete All</button>
         </section>
         <section class="sect done">
             <h1>Done</h1>
             <div class="todo-tasks tasks">
                 <ul class="tasks-wrapper"></ul>
             </div>
+            <button class="btn add-doing">Add</button>
         </section>
     </div>
 

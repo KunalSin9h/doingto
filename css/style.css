@@ -42,7 +42,7 @@ main {
     align-items: center;
 }
 
-textarea {
+.textarea--1 {
     background: none;
     border: none;
     outline: none;
@@ -183,14 +183,13 @@ li p {
 
 .btn {
     background-color: #61d1ac;
-    color: white;
+    color: black;
     border: none;
     outline: none;
     font-size: 12px;
     border-radius: 5px;
     padding: 10px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    margin: 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 }
 
 .btn:hover {
@@ -201,4 +200,33 @@ li p {
 .btn:active {
     transform: scale(1.05);
     background-color: #123127;
+}
+
+.delete--work{
+    position: absolute; 
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid black;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    font-family: 'Baloo 2', cursive;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.delete--work:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.delete--work:active {
+    transform: translateY(3px);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+*::selection {
+    background-color: yellow;
+    color: brown;
 }

@@ -291,4 +291,5 @@ li p {
 
 .tasks-list-items {
     margin-bottom: 10px;
+    overflow: hidden;
 }

@@ -15,7 +15,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #7fffd4;
+    /* background-color: #7fffd4; */
+    background: linear-gradient(to bottom right, #7fffd4, skyblue)    
 }
 
 .brand {

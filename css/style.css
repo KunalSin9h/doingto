@@ -15,7 +15,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: #7fffd4; */
     background: linear-gradient(to bottom right, #7fffd4, skyblue)    
 }
 
@@ -283,10 +282,13 @@ li p {
     z-index: 5;
 }
 
-
 .no-text-warning {
     margin-top: 20px;
     font-family: 'Baloo 2', cursive;
     text-align: center;
     color: red;
+}
+
+.tasks-list-items {
+    margin-bottom: 10px;
 }

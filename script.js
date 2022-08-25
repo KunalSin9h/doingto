@@ -29,47 +29,51 @@ setupPage();
 createWork.addEventListener(`click`, () => {
     const workName = textArea.value;
     createWorkspace(workName);
-})
+});
 
 deleteWork.addEventListener(`click`, () => {
     localStorage.clear();
     hideWorkspace();
     removeOldTasks();
     showStart();
+    textArea.focus();
     pageTitle.textContent = `doingto`; 
-})
+});
 
 textArea.addEventListener(`keypress`, (e) => {
     if (e.key === `Enter`) {
         const workName = textArea.value;
         createWorkspace(workName);       
     } 
-})
+});
 
 addTodo.addEventListener(`click`, () => {
     showModal();
+    taskTextArea.focus();
     taskType = `todo`;
-})
+});
 
 addDoing.addEventListener(`click`, () => {
     showModal();
+    taskTextArea.focus();
     taskType = `doing`;
-})
+});
 
 addDone.addEventListener(`click`, () => {
     showModal();
+    taskTextArea.focus();
     taskType = `done`;
-})
+});
 
 cancelBtn.addEventListener(`click`, () => {
     hideModal();
     hideWarning();
-})
+});
 
 overlay.addEventListener(`click`, () => {
     hideModal();
     hideWarning();
-})
+});
 
 addButton.addEventListener(`click`, () => {
     const input = taskTextArea.value; 
@@ -84,7 +88,7 @@ addButton.addEventListener(`click`, () => {
         saveTaskToStorage(taskInput);
         createTodo(taskInput);
     }
-})
+});
 
 taskTextArea.addEventListener(`keypress`, (e) => {
     hideWarning();
@@ -96,7 +100,40 @@ taskTextArea.addEventListener(`keypress`, (e) => {
         saveTaskToStorage(taskInput);
         createTodo(taskInput);
     }
-})
+});
+
+todoTasks.addEventListener(`click`, (e) => {
+    const item = e.target; 
+    if (item.classList[1] === `delete-task`) {
+        deleteTodo(item);
+    } else if (item.classList[1] === `move-task`) {
+        deleteTodo(item);
+        const newTask = makeTask(item.parentElement.children[0].textContent, `doing`);
+        saveTaskToStorage(newTask);
+        window.location.reload();
+    }
+});
+
+doingTasks.addEventListener(`click`, (e) => {
+    const item = e.target; 
+    if (item.classList[1] === `delete-task`) {
+        deleteTodo(item);
+    } else if (item.classList[1] === `move-task`) {
+        deleteTodo(item);
+        const newTask = makeTask(item.parentElement.children[0].textContent, `done`);
+        saveTaskToStorage(newTask);
+        window.location.reload();
+    } 
+});
+
+doneTasks.addEventListener(`click`, (e) => {
+    const item = e.target; 
+    if (item.classList[1] === `delete-task`) {
+        item.parentElement.remove(); 
+        const taskId = Number(item.parentElement.children[0].id);
+        removeTaskFromStorage(taskId); 
+    }      
+});
 
 function setupPage() {
     const isWork = localStorage.getItem(`isWork`);
@@ -113,6 +150,7 @@ function setupPage() {
     } else {
         showStart();
         hideWorkspace();
+        textArea.focus();
     }
 }
 
@@ -203,25 +241,41 @@ function saveTaskToStorage(task) {
     localStorage.setItem(`tasks`, JSON.stringify(savedTasks));
 }
 
+function removeTaskFromStorage(taskId) {
+    const savedTasks = JSON.parse(localStorage.getItem(`tasks`));
+    const newTaskList = savedTasks.filter(item => {
+        return item.id !== taskId;  
+    });
+    localStorage.setItem(`tasks`, JSON.stringify(newTaskList));
+}
+
 function makeTask(taskTitle, toList) {
     return {
         title: taskTitle,
         list: toList,
+        id: Date.now(),
     };
 }
 
 function createTodo(task) {
 
     const taskListElement = document.createElement(`li`);
-    taskListElement.innerHTML = `${task.title}`;
     taskListElement.classList.add(`tasks-list-items`);
     
     if (task.list === `todo`) {
+        taskListElement.innerHTML = `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
         todoTasks.appendChild(taskListElement);
     } else if (task.list === `doing`) {
+        taskListElement.innerHTML = `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
         doingTasks.appendChild(taskListElement);
     } else if (task.list === `done`) {
+        taskListElement.innerHTML = `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined done-task">task_alt</span>`;
         doneTasks.appendChild(taskListElement);
     }
 }
 
+function deleteTodo(element) {
+    element.parentElement.remove(); 
+    const taskId = Number(element.parentElement.children[0].id);
+    removeTaskFromStorage(taskId);    
+}

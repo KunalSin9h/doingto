@@ -290,6 +290,66 @@ li p {
 }
 
 .tasks-list-items {
-    margin-bottom: 10px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delete-task {
+    position: absolute;
+    color: red;
+    cursor: pointer;
+    right: 50px;
+    transition: all 300ms;
+    opacity: 0;
+    pointer-events: none;
+}
+
+li:hover .delete-task{
+    pointer-events: all;
+    opacity: 1;
+}
+
+.move-task {
+    position: absolute;
+    color: green;
+    cursor: pointer;
+    right: 15px;
+    transition: all 300ms;
+    opacity: 0;
+    pointer-events: none;
+}
+
+li:hover .move-task{
+    pointer-events: all;
+    opacity: 1;
+}
+
+.done-task {
+    position: absolute;
+    color: green;
+    right: 15px;
+    transition: all 300ms;
+    opacity: 0;
+}
+
+li:hover .done-task{
+    opacity: 1;
+}
+
+.add-btn {
+    background-color: #61d1ac;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+.add-btn:hover {
+    transform: scale(1.09);
+    background-color: #357761;
+}
+
+.add-btn:active {
+    transform: scale(1.05);
+    background-color: #123127;
 }

@@ -10,12 +10,17 @@ a:hover {
     text-decoration: underline;
 }
 
+body {
+    background: linear-gradient(to top right, #7fffd4, skyblue);
+}
+
 main {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom right, #7fffd4, skyblue)    
+    background: linear-gradient(to bottom right, #7fffd4, skyblue);
+    background-repeat: repeat;
 }
 
 .brand {

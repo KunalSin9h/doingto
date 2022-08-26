@@ -75,7 +75,7 @@ overlay.addEventListener(`click`, () => {
 });
 
 addButton.addEventListener(`click`, () => {
-  const input = taskTextArea.value;
+  const input = taskTextArea.value.trim();
   taskTextArea.value = ``;
   const taskInput = makeTask(input, taskType);
 

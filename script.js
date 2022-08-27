@@ -31,12 +31,15 @@ createWork.addEventListener(`click`, () => {
 });
 
 deleteWork.addEventListener(`click`, () => {
-  localStorage.clear();
-  hideWorkspace();
-  removeOldTasks();
-  showStart();
-  textArea.focus();
-  pageTitle.textContent = `doingto`;
+  const canDelete = confirm(`Are you sure you want to delete this workspace?`);
+  if (canDelete) {
+    localStorage.clear();
+    hideWorkspace();
+    removeOldTasks();
+    showStart();
+    textArea.focus();
+    pageTitle.textContent = `doingto`;
+  }
 });
 
 textArea.addEventListener(`keypress`, (e) => {

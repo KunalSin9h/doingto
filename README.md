@@ -23,6 +23,7 @@
 #### For `Linux`
 Download: [Click Here](https://github.com/KunalSin9h/doingto/releases/download/v0.2.0/doingto-linux-x86_64.AppImage)
 - and go to the Download folder and type `chmod +x doingto-Linux-x86_64.AppImage`
+
 > If you are using Ubuntu and above steps are not properly executing the app
 - then in bash Download `libfuse2` by typing `sudo apt install libfuse2`
 

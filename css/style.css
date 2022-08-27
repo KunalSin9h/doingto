@@ -205,8 +205,8 @@ li p {
     background-color: #123127;
 }
 
-.delete--work{
-    position: absolute; 
+.delete--work {
+    position: absolute;
     top: 20px;
     right: 20px;
     background: rgba(255, 255, 255, 0.5);
@@ -234,7 +234,7 @@ li p {
     color: orange;
 }
 
-.add--tasks {
+.add--task {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -243,11 +243,32 @@ li p {
     width: 300px;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
 }
 
-.add--tasks textarea {
+.add--task textarea {
+    border: none;
+    outline: none;
+    resize: none;
+    margin: 20px;
+    font-size: 20px;
+}
+
+.edit--task--modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 220px;
+    width: 300px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.edit--task--modal textarea {
     border: none;
     outline: none;
     resize: none;
@@ -264,11 +285,11 @@ li p {
 }
 
 .cancel:hover {
-    background-color:  #ff0000;
+    background-color: #ff0000;
 }
 
 .cancel:active {
-    background-color:  #cc0000;
+    background-color: #cc0000;
 }
 
 .add {
@@ -311,7 +332,7 @@ li p {
     pointer-events: none;
 }
 
-li:hover .delete-task{
+li:hover .delete-task {
     pointer-events: all;
     opacity: 1;
 }
@@ -326,7 +347,22 @@ li:hover .delete-task{
     pointer-events: none;
 }
 
-li:hover .move-task{
+li:hover .move-task {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.edit--task {
+    position: absolute;
+    color: purple;
+    cursor: pointer;
+    right: 83px;
+    transition: all 300ms;
+    opacity: 0;
+    pointer-events: none;
+}
+
+li:hover .edit--task {
     pointer-events: all;
     opacity: 1;
 }
@@ -339,7 +375,7 @@ li:hover .move-task{
     opacity: 0;
 }
 
-li:hover .done-task{
+li:hover .done-task {
     opacity: 1;
 }
 
@@ -349,6 +385,7 @@ li:hover .done-task{
     padding: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+
 .add-btn:hover {
     transform: scale(1.09);
     background-color: #357761;

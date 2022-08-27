@@ -1,6 +1,7 @@
 "use strict";
 
 let taskType = `todo`;
+let editElement = null;
 
 const mainCenter = document.querySelector(`.sec`),
   footer = document.querySelector(`footer`),
@@ -8,20 +9,23 @@ const mainCenter = document.querySelector(`.sec`),
   deleteWork = document.querySelector(`.delete--work`),
   textArea = document.querySelector(`.textarea--1`),
   taskTextArea = document.querySelector(`.textarea--2`),
+  editTextArea = document.querySelector(`.textarea--3`),
   workTitle = document.querySelector(`.work--title`),
   pageTitle = document.querySelector(`title`),
   lists = document.querySelector(`.list`),
-  modalAddTasks = document.querySelector(`.add--tasks`),
+  modalAddTasks = document.querySelector(`.add--task`),
+  modalEditTasks = document.querySelector(`.edit--task--modal`),
   cancelBtn = document.querySelector(`.cancel`),
   overlay = document.querySelector(`.overlay`),
   addTodo = document.querySelector(`.add-todo`),
   addDoing = document.querySelector(`.add-doing`),
   addDone = document.querySelector(`.add-done`),
   addButton = document.querySelector(`.add`),
+  saveButton = document.querySelector(`.save`),
   todoTasks = document.querySelector(`.todo-tasks`),
   doingTasks = document.querySelector(`.doing-tasks`),
   doneTasks = document.querySelector(`.done-tasks`),
-  warning = document.querySelector(`.no-text-warning`);
+  warning = document.querySelectorAll(`.no-text-warning`);
 
 setupPage();
 
@@ -31,12 +35,15 @@ createWork.addEventListener(`click`, () => {
 });
 
 deleteWork.addEventListener(`click`, () => {
-  localStorage.clear();
-  hideWorkspace();
-  removeOldTasks();
-  showStart();
-  textArea.focus();
-  pageTitle.textContent = `doingto`;
+  const canDelete = confirm(`Are you sure you want to delete this workspace?`);
+  if (canDelete) {
+    localStorage.clear();
+    hideWorkspace();
+    removeOldTasks();
+    showStart();
+    textArea.focus();
+    pageTitle.textContent = `doingto`;
+  }
 });
 
 textArea.addEventListener(`keypress`, (e) => {
@@ -72,6 +79,7 @@ cancelBtn.addEventListener(`click`, () => {
 overlay.addEventListener(`click`, () => {
   hideModal();
   hideWarning();
+  hideEditModal();
 });
 
 addButton.addEventListener(`click`, () => {
@@ -85,12 +93,25 @@ taskTextArea.addEventListener(`keypress`, (e) => {
   }
 });
 
+saveButton.addEventListener(`click`, () => {
+  editTask();
+});
+
+editTextArea.addEventListener(`keypress`, (e) => {
+  hideWarning();
+  if (e.key === `Enter`) {
+    editTask();
+  }
+});
+
 todoTasks.addEventListener(`click`, (e) => {
   const item = e.target;
   if (item.classList[1] === `delete-task`) {
     deleteTodo(item);
   } else if (item.classList[1] === `move-task`) {
     moveTodo(item, `doing`);
+  } else if (item.classList[1] === `edit--task`) {
+    prepareEdit(item);
   }
 });
 
@@ -100,6 +121,8 @@ doingTasks.addEventListener(`click`, (e) => {
     deleteTodo(item);
   } else if (item.classList[1] === `move-task`) {
     moveTodo(item, `done`);
+  } else if (item.classList[1] === `edit--task`) {
+    prepareEdit(item);
   }
 });
 
@@ -109,6 +132,8 @@ doneTasks.addEventListener(`click`, (e) => {
     item.parentElement.remove();
     const taskId = Number(item.parentElement.children[0].id);
     removeTaskFromStorage(taskId);
+  } else if (item.classList[1] === `edit--task`) {
+    prepareEdit(item);
   }
 });
 
@@ -212,13 +237,26 @@ function hideModal() {
   overlay.classList.add(`hidden`);
   modalAddTasks.classList.add(`hidden`);
 }
+function showEditModal() {
+  overlay.classList.remove(`hidden`);
+  modalEditTasks.classList.remove(`hidden`);
+}
+
+function hideEditModal() {
+  overlay.classList.add(`hidden`);
+  modalEditTasks.classList.add(`hidden`);
+}
 
 function showWarning() {
-  warning.classList.remove(`hidden`);
+  warning.forEach((item) => {
+    item.classList.remove(`hidden`);
+  });
 }
 
 function hideWarning() {
-  warning.classList.add(`hidden`);
+  warning.forEach((item) => {
+    item.classList.add(`hidden`);
+  });
 }
 
 function removeOldTasks() {
@@ -241,6 +279,16 @@ function removeTaskFromStorage(taskId) {
   localStorage.setItem(`tasks`, JSON.stringify(newTaskList));
 }
 
+function updateTitleToStorage(newTitle, taskId) {
+  const savedTasks = JSON.parse(localStorage.getItem(`tasks`));
+  savedTasks.forEach((item) => {
+    if (item.id == taskId) {
+      item.title = newTitle;
+    }
+  });
+  localStorage.setItem(`tasks`, JSON.stringify(savedTasks));
+}
+
 function makeTask(taskTitle, toList) {
   return {
     title: taskTitle,
@@ -255,15 +303,15 @@ function createTodo(task) {
 
   if (task.list === `todo`) {
     taskListElement.innerHTML =
-      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
+      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined edit--task">edit</span> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
     todoTasks.appendChild(taskListElement);
   } else if (task.list === `doing`) {
     taskListElement.innerHTML =
-      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
+      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined edit--task">edit</span> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined move-task">forward</span>`;
     doingTasks.appendChild(taskListElement);
   } else if (task.list === `done`) {
     taskListElement.innerHTML =
-      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined done-task">task_alt</span>`;
+      `<p id="${task.id}">${task.title}</p> <span class="material-symbols-outlined edit--task">edit</span> <span class="material-symbols-outlined delete-task">delete</span> <span class="material-symbols-outlined done-task">task_alt</span>`;
     doneTasks.appendChild(taskListElement);
   }
 }
@@ -282,4 +330,27 @@ function moveTodo(element, list) {
   );
   saveTaskToStorage(newTask);
   createTodo(newTask);
+}
+
+function prepareEdit(element) {
+  editElement = element.parentElement.children[0];
+  showEditModal();
+  editTextArea.value = editElement.textContent;
+
+  /* Move cursor to end to text */
+  const end = editTextArea.value.length;
+  editTextArea.setSelectionRange(end, end);
+  editTextArea.focus();
+  /* --- */
+}
+
+function editTask() {
+  const newTaskContent = editTextArea.value.trim();
+  if (newTaskContent === ``) {
+    showWarning();
+  } else {
+    editElement.textContent = newTaskContent;
+    hideEditModal();
+    updateTitleToStorage(newTaskContent, Number(editElement.id));
+  }
 }

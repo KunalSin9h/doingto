@@ -75,29 +75,13 @@ overlay.addEventListener(`click`, () => {
 });
 
 addButton.addEventListener(`click`, () => {
-  const input = taskTextArea.value.trim();
-  taskTextArea.value = ``;
-  const taskInput = makeTask(input, taskType);
-
-  if (input === ``) {
-    showWarning();
-  } else {
-    hideModal();
-    hideWarning();
-    saveTaskToStorage(taskInput);
-    createTodo(taskInput);
-  }
+  addTask();
 });
 
 taskTextArea.addEventListener(`keypress`, (e) => {
   hideWarning();
   if (e.key === `Enter`) {
-    const input = taskTextArea.value;
-    taskTextArea.value = ``;
-    const taskInput = makeTask(input, taskType);
-    hideModal();
-    saveTaskToStorage(taskInput);
-    createTodo(taskInput);
+    addTask();
   }
 });
 
@@ -144,6 +128,21 @@ function setupPage() {
     showStart();
     hideWorkspace();
     textArea.focus();
+  }
+}
+
+function addTask() {
+  const input = taskTextArea.value.trim();
+  taskTextArea.value = ``;
+  const taskInput = makeTask(input, taskType);
+
+  if (input === ``) {
+    showWarning();
+  } else {
+    hideModal();
+    hideWarning();
+    saveTaskToStorage(taskInput);
+    createTodo(taskInput);
   }
 }
 

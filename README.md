@@ -11,19 +11,19 @@
 </p>
 
 
-***doingto*** is simple and open source todo app which lets you to devide you progress into three category viz todo, doing and done.
+***doingto*** is simple and open source todo app which lets you to divide you progress into three category viz todo, doing and done.
 
  ❤️ Thanks [Srijan Soni](https://github.com/srijan0412) for logo.
 
 ###  Live site: [doingto.live](https://doingto.live)
 
 ### Download `Desktop` app
-#### For  `Windows`: [Click Here](https://github.com/KunalSin9h/doingto/releases/download/v0.1.0/doingto-win32-x64.exe)
+#### For `Windows`: [Click Here](https://github.com/KunalSin9h/doingto/releases/download/v0.2.0/doingto-win32-x64.exe)
 ---
 #### For `Linux`
-Download: [Click Here](https://github.com/KunalSin9h/doingto/releases/download/v0.1.0/doingto-linux-x86_64.AppImage)
+Download: [Click Here](https://github.com/KunalSin9h/doingto/releases/download/v0.2.0/doingto-linux-x86_64.AppImage)
 - and go to the Download folder and type `chmod +x doingto-Linux-x86_64.AppImage`
-> If you are using ubuntu and above steps are not properly executing the app
+> If you are using Ubuntu and above steps are not properly executing the app
 - then in bash Download `libfuse2` by typing `sudo apt install libfuse2`
 
 🚀 New updates and releases are automatically deployed to production.

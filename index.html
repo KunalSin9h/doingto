@@ -13,6 +13,7 @@
     <link rel="canonical" href="https://doingto.live/" />
 
     <!-- open graph -->
+
     <meta  property="og:title" content="doingto is simple and open source todo app." />
     <meta  property="og:url" content="https://doingto.live/" />
     <meta  property="og:site_name" content="doingto.live" />
@@ -20,6 +21,7 @@
     <meta  property="og:type" content="website" />
     <meta  property="og:description"
         content="doingto is simple and open source todo app which lets you to divide you progress into three category viz todo, doing and done." />
+
     <meta property="og:locale" content="en_US" />
 
     <!-- twitter card -->
@@ -45,10 +47,21 @@
     <link rel="stylesheet" href="./css/style.css" />
 
     <!-- icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><!-- delete -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><!-- add -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><!-- forward -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><!-- done task -->
+    <!-- delete -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- add -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- forward -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- done task -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- edit -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,0" />
 
 </head>
 
@@ -71,11 +84,17 @@
     <div class="work--title hidden">Today's work</div>
     <button type="button" class="delete--work">Delete work</button>
 
-    <section class="add--tasks hidden">
-         <div class="no-text-warning hidden">⛔️ Task cannot be empty!</div>
+    <section class="add--task hidden">
+        <div class="no-text-warning hidden">⛔️ Task cannot be empty!</div>
         <textarea placeholder="Enter new task here" rows="5" class="textarea--2"></textarea>
         <button class="btn cancel">Cancel</button>
         <button class="btn add">Add</button>
+    </section>
+
+    <section class="edit--task--modal hidden">
+        <div class="no-text-warning hidden">⛔️ Task cannot be empty!</div>
+        <textarea placeholder="" rows="5" class="textarea--3"></textarea>
+        <button class="btn save add">Save</button>
     </section>
 
     <div class="list hidden">
@@ -107,7 +126,8 @@
         </div>
 
         <div class="link">
-            <a href="https://github.com/KunalSin9h/doingto" target="_blank"><img src="./images/github.png" alt="github logo" /></a>
+            <a href="https://github.com/KunalSin9h/doingto" target="_blank"><img src="./images/github.png"
+                    alt="github logo" /></a>
             <div class="support">
                 Feedback : <a href="mailto:support@doingto.live">support@doingto.live</a>
             </div>

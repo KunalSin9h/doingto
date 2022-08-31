@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://doingto.live/images/ogimage.png" alt="doingto banner">
+    <img src="https://doingto.live/images/doingto.png" alt="doingto sample">
 </p>
 
 <h1 align="center">doingto</h1>

@@ -9,9 +9,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
 body {
-    background: linear-gradient(to top right, #7fffd4, skyblue);
+    background-image: url("../images/bg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; 
 }
 
 main {
@@ -19,8 +21,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom right, #7fffd4, skyblue);
-    background-repeat: repeat;
 }
 
 .brand {
@@ -55,6 +55,9 @@ main {
     font-size: 30px;
     font-family: 'Baloo 2', cursive;
     border-bottom: 2px solid black;
+}
+.textarea--1::placeholder {
+  color: black;
 }
 
 .create--btn {
@@ -231,7 +234,7 @@ li p {
 
 *::selection {
     background-color: inherit;
-    color: orange;
+    color: #6593ad;
 }
 
 

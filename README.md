@@ -1,5 +1,8 @@
 <p align="center">
-    <img src="https://doingto.live/images/doingto.png" alt="doingto sample">
+    <img src="https://doingto.live/images/demo1.png" alt="doingto demo image">
+</p>
+<p align="center">
+    <img src="https://doingto.live/images/demo2.png" alt="doingto work demo image">
 </p>
 
 <h1 align="center">doingto</h1>

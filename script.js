@@ -222,6 +222,7 @@ function setupLists() {
   lists.style.display = `flex`;
   lists.style.justifyContent = `space-evenly`;
   lists.style.flexWrap = `wrap`;
+  lists.style.alignItems = `flex-start`;
 }
 
 function hideLists() {
